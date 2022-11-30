@@ -1,15 +1,11 @@
 package mk.finki.ukim.mk.lab.filter;
-
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.LogRecord;
 
 
 @Component
@@ -31,9 +27,11 @@ public class MyFilter implements Filter {
         }
         String path=httpServletRequest.getServletPath();
         //System.out.println("Filter");
-        if ( !"/".equals(path) && color==null){
-            System.out.println(path+" "+color);
-            httpServletResponse.sendRedirect("/");
+        if ( !"".equals(path) && !path.contains("/balloons") &&
+                !"/main.css".equals(path)
+                && !path.contains("/search") && color==null){
+            System.out.println(path);
+            httpServletResponse.sendRedirect("");
         } else {
             filterChain.doFilter(servletRequest,servletResponse);
         }

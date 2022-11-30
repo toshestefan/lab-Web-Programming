@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+  <meta charset="utf-8">
+  <title>Search</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+  <style>
+    body {
+      width: 800px;
+      margin: auto;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>Search</h1>
+</header>
+<main>
+
+  <table>
+    <tr>
+      <th>Search results</th>
+    </tr>
+    <tr th:each="s: ${search}">
+      <td><th:block th:text="${s}"></th:block> </td>
+    </tr>
+  </table>
+</main>
+</body>
+</html>

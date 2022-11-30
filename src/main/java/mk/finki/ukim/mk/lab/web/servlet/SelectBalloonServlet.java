@@ -4,7 +4,6 @@ package mk.finki.ukim.mk.lab.web.servlet;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +19,7 @@ public class SelectBalloonServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String color=req.getParameter("color");
         WebContext webContext=new WebContext(req,resp,req.getServletContext());
         webContext.setVariable("color",color);

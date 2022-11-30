@@ -2,7 +2,6 @@ package mk.finki.ukim.mk.lab.web.servlet;
 
 import mk.finki.ukim.mk.lab.service.OrderService;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession s=req.getSession();
         orderService.placeOrder(
                 (String) s.getAttribute("color"),

@@ -6,7 +6,7 @@ import org.aspectj.weaver.ast.Or;
 import java.util.List;
 
 public interface OrderService {
-    Order placeOrder(String balloonColor, String ballonSize, String clientName, String address, Long id);
+     Order placeOrder(String balloonColor, String balloonSize, String clientName, String address, Long id);
 
     List<Order> listAll();
 }

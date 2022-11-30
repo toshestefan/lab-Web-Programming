@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public class OrderRepository {
-    private final List<Order> orders = new ArrayList<Order>();
+    private final List<Order> orders = new ArrayList<>();
 
     @PostConstruct
     private void init(){

@@ -18,8 +18,8 @@ public class OrderServiceImpl implements OrderService {
 
 
     @Override
-    public Order placeOrder(String balloonColor, String ballonSize, String clientName, String address, Long id) {
-        return orderRepository.addOrder(balloonColor,ballonSize,clientName,address,id);
+    public synchronized Order placeOrder(String balloonColor, String balloonSize, String clientName, String address, Long id) {
+        return orderRepository.addOrder(balloonColor, balloonSize,clientName,address,id);
     }
 
 

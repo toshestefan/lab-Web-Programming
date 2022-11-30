@@ -1,7 +1,6 @@
 package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.model.User;
-import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.stereotype.Repository;
 
 import javax.annotation.PostConstruct;

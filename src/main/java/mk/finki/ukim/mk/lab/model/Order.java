@@ -17,6 +17,17 @@ public class Order {
         this.balloonColor = balloonColor;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "balloonColor='" + balloonColor + '\'' +
+                ", balloonSize='" + balloonSize + '\'' +
+                ", clientName='" + clientName + '\'' +
+                ", clientAddress='" + clientAddress + '\'' +
+                ", orderId=" + orderId +
+                '}';
+    }
+
     public void setBalloonSize(String balloonSize) {
         this.balloonSize = balloonSize;
     }

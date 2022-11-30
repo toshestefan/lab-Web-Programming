@@ -1,7 +1,9 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="eng">
 <head>
   <meta charset="utf-8">
   <title>Balloon Order page - Welcome and choose a Balloon</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
   <style>
     body {
       width: 800px;
@@ -18,6 +20,26 @@
   <h1>Welcome to our Balloon Shop App</h1>
 </header>
 <main>
+  <form method="post" action="/search">
+    <input type="text" name="search">
+    <button type="submit">Search</button>
+  </form>
+
+  <h2>Manufacturers</h2>
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Address</th>
+      <th>Country</th>
+    </tr>
+    <tr th:each="manufacturer: ${manufacturers}">
+      <td><th:block th:text="${manufacturer.getId()}"></th:block> </td>
+      <td><th:block th:text="${manufacturer.getName()}"></th:block> </td>
+      <td><th:block th:text="${manufacturer.getAddress()}"></th:block> </td>
+      <td><th:block th:text="${manufacturer.getCountry()}"></th:block> </td>
+    </tr>
+  </table>
   <h2>Previous Orders</h2>
   <table>
     <tr>
@@ -37,10 +59,32 @@
   </table>
 
   <h2>Balloons</h2>
-  <ul>
-    <li th:each="balloon: ${balloons}"> <th:block th:text="${balloon.name}"></th:block> </li>
-  </ul>
-
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Balloon Name</th>
+      <th>Description</th>
+      <th>Manufacturer</th>
+      <th></th>
+    </tr>
+    <tr th:each="balloon: ${balloons}">
+      <td><th:block th:text="${balloon.getId()}"></th:block> </td>
+      <td><th:block th:text="${balloon.getName()}"></th:block> </td>
+      <td><th:block th:text="${balloon.getDescription()}"></th:block> </td>
+      <td><th:block th:text="${balloon.getManufacturer().getName()}"></th:block> </td>
+      <td colspan="2">
+        <form th:action="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" th:method="post">
+          <button type="submit">Edit</button>
+        </form>
+        <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+  </table>
+  <form action="/balloons/add-form" th:method="get">
+    <button type="submit">Add balloon</button>
+  </form>
   <h2>Choose balloon color:</h2>
   <form action="/selectBalloon" method="post">
   <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>

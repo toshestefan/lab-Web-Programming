@@ -16,6 +16,7 @@ public class ConfirmationInfoServlet  extends HttpServlet {
 
      private final SpringTemplateEngine springTemplateEngine;
 
+
     public ConfirmationInfoServlet(SpringTemplateEngine springTemplateEngine) {
         this.springTemplateEngine = springTemplateEngine;
     }
@@ -24,33 +25,30 @@ public class ConfirmationInfoServlet  extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         WebContext webContext=new WebContext(req,resp,req.getServletContext());
-        String clientName=req.getParameter("clientName");
-        String clientAddress=req.getParameter("clientAddress");
         String clientBrowser=req.getHeader("User-agent");
         String clientIPAddress=req.getRemoteAddr();
         String size= (String) req.getSession().getAttribute("size");
         String color= (String) req.getSession().getAttribute("color");
+        String cart=req.getParameter("cart");
 
-        setAttributesInSession(req.getSession(), clientName, clientAddress, clientBrowser, clientIPAddress);
+        setAttributesInSession(req.getSession(), clientBrowser, clientIPAddress,cart);
 
-        setVariablesInWebContext(webContext, clientName, clientAddress, clientBrowser, clientIPAddress, size, color);
+        setVariablesInWebContext(webContext, clientBrowser, clientIPAddress, size, color,cart);
 
         springTemplateEngine.process("confirmationInfo.html",webContext,resp.getWriter());
     }
 
-    private void setVariablesInWebContext(WebContext webContext, String clientName, String clientAddress, String clientBrowser, String clientIPAddress, String size, String color) {
-        webContext.setVariable("clientName", clientName);
-        webContext.setVariable("clientAddress", clientAddress);
+    private void setVariablesInWebContext(WebContext webContext, String clientBrowser, String clientIPAddress, String size, String color, String cart) {
         webContext.setVariable("clientIPAddress", clientIPAddress);
         webContext.setVariable("clientBrowser", clientBrowser);
         webContext.setVariable("color", color);
         webContext.setVariable("size", size);
+        webContext.setVariable("cart" ,cart);
     }
 
-    private void setAttributesInSession(HttpSession session, String clientName, String clientAddress, String clientBrowser, String clientIPAddress) {
-        session.setAttribute("clientName", clientName);
-        session.setAttribute("clientAddress", clientAddress);
+    private void setAttributesInSession(HttpSession session, String clientBrowser, String clientIPAddress, String cart) {
         session.setAttribute("clientBrowser", clientBrowser);
         session.setAttribute("clientIPAddress", clientIPAddress);
+        session.setAttribute("cart",cart);
     }
 }

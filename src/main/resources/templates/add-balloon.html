@@ -6,7 +6,7 @@
     <title>Balloon Order page - Welcome and choose a Balloon</title>
     <style>
          body {
-             width: 800px;
+             width: 1200px;
              margin: auto;
          }
          table, th, td {
@@ -18,11 +18,18 @@
  <body>
  <header>
      <h1>Welcome to our Balloon Shop App</h1>
+     <ul>
+         <li><a href="/balloons">Balloons</a></li>
+         <li><a href="/carts">Carts</a></li>
+         <li><a href="/logout" style="float:right">Logout</a></li>
+     </ul>
      <h2 th:text="${header}"></h2>
  </header>
  <main>
 
-
+    <ul>
+        <li></li>
+    </ul>
 
      <form method="post" action="/balloons/add">
          <input id="id" type="hidden" name="id" th:value="(${balloon} != null ? ${balloon.getId()} : '')">

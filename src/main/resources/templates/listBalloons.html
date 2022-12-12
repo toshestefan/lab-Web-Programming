@@ -6,7 +6,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
   <style>
     body {
-      width: 800px;
+      width: 1200px;
       margin: auto;
     }
     table, th, td {
@@ -17,6 +17,11 @@
 </head>
 <body>
 <header>
+  <ul>
+    <li><a href="/balloons">Balloons</a></li>
+    <li><a href="/carts">Carts</a></li>
+    <li><a href="/logout" style="float:right">Logout</a></li>
+  </ul>
   <h1>Welcome to our Balloon Shop App</h1>
 </header>
 <main>
@@ -40,23 +45,7 @@
       <td><th:block th:text="${manufacturer.getCountry()}"></th:block> </td>
     </tr>
   </table>
-  <h2>Previous Orders</h2>
-  <table>
-    <tr>
-      <th>Balloon Color</th>
-      <th>Balloon Size</th>
-      <th>Client Name</th>
-      <th>Client Address</th>
-      <th>ID</th>
-    </tr>
-    <tr th:each="order: ${orders}">
-      <td><th:block th:text="${order.getBalloonColor()}"></th:block> </td>
-      <td><th:block th:text="${order.getBalloonSize()}"></th:block> </td>
-      <td><th:block th:text="${order.clientName}"></th:block> </td>
-      <td><th:block th:text="${order.clientAddress}"></th:block> </td>
-      <td><th:block th:text="${order.orderId}"></th:block> </td>
-    </tr>
-  </table>
+
 
   <h2>Balloons</h2>
   <table>

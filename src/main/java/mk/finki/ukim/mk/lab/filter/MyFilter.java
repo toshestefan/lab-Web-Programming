@@ -9,7 +9,7 @@ import java.io.IOException;
 
 
 @Component
-@Order(1)
+@Order(2)
 public class MyFilter implements Filter {
 
 
@@ -29,7 +29,13 @@ public class MyFilter implements Filter {
         //System.out.println("Filter");
         if ( !"".equals(path) && !path.contains("/balloons") &&
                 !"/main.css".equals(path)
-                && !path.contains("/search") && color==null){
+                && !path.contains("/search")
+                && !path.contains("/h2")
+                && !path.contains("/login")
+                && !path.contains("/register")
+                && !path.contains("/carts")
+                && !path.contains("/logout")
+                && color==null){
             System.out.println(path);
             httpServletResponse.sendRedirect("");
         } else {

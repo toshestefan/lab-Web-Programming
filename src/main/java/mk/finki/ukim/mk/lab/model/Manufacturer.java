@@ -1,11 +1,33 @@
 package mk.finki.ukim.mk.lab.model;
 
-public class Manufacturer {
 
-    private final Long id;
-    private final String name;
-    private final String country;
-    private final String address;
+import lombok.Data;
+
+import javax.persistence.*;
+
+@Data
+@Entity
+public class Manufacturer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    private String name;
+    private String country;
+    private String address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Manufacturer() {
+
+    }
 
     @Override
     public String toString() {
@@ -17,9 +39,6 @@ public class Manufacturer {
                 '}';
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public String getName() {
         return name;
@@ -37,6 +56,5 @@ public class Manufacturer {
         this.name = name;
         this.country = country;
         this.address = address;
-        this.id=(long) (Math.random()*1000);
     }
 }

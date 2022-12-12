@@ -6,6 +6,9 @@ import mk.finki.ukim.mk.lab.model.Order;
 import mk.finki.ukim.mk.lab.repository.BalloonRepository;
 import mk.finki.ukim.mk.lab.repository.ManufacturerRepository;
 import mk.finki.ukim.mk.lab.repository.OrderRepository;
+import mk.finki.ukim.mk.lab.repository.memory.InMemoryBalloonRepository;
+import mk.finki.ukim.mk.lab.repository.memory.InMemoryManufacturerRepository;
+import mk.finki.ukim.mk.lab.repository.memory.InMemoryOrderRepository;
 import mk.finki.ukim.mk.lab.service.SearchService;
 import org.springframework.stereotype.Service;
 
@@ -21,8 +24,7 @@ public class SearchServiceImpl implements SearchService {
 
     public SearchServiceImpl(BalloonRepository balloonRepository,
                              ManufacturerRepository manufacturerRepository,
-                             OrderRepository orderRepository)
-    {
+                             OrderRepository orderRepository) {
         this.balloonRepository = balloonRepository;
         this.manufacturerRepository = manufacturerRepository;
         this.orderRepository = orderRepository;
@@ -38,7 +40,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private void searchOrders(String text, List<String> list) {
-        for (Order order : orderRepository.listAll()){
+        for (Order order : orderRepository.findAll()){
             if (order.toString().contains(text)){
                 list.add(order.toString());
             }
@@ -54,7 +56,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     private void searchBalloons(String text, List<String> list) {
-        for (Balloon balloon : balloonRepository.findAllBalloons()){
+        for (Balloon balloon : balloonRepository.findAll()){
             if (balloon.toString().contains(text)){
                 list.add(balloon.toString());
             }

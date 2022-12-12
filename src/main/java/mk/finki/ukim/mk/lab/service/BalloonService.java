@@ -2,7 +2,7 @@ package mk.finki.ukim.mk.lab.service;
 
 import mk.finki.ukim.mk.lab.exception.BalloonNotFoundException;
 import mk.finki.ukim.mk.lab.model.Balloon;
-import mk.finki.ukim.mk.lab.service.exception.ManufacturerNotFoundException;
+import mk.finki.ukim.mk.lab.exception.ManufacturerNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +15,7 @@ public interface BalloonService {
 
     public Optional<Balloon> save(String name, String description, Long manufacturer) throws ManufacturerNotFoundException;
 
-    public boolean deleteById(Long id);
+    public void deleteById(Long id);
 
     public Optional<Balloon> findById(Long id);
 }

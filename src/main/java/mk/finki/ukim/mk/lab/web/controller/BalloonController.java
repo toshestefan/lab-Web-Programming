@@ -7,7 +7,7 @@ import mk.finki.ukim.mk.lab.model.Manufacturer;
 import mk.finki.ukim.mk.lab.service.BalloonService;
 import mk.finki.ukim.mk.lab.service.ManufacturerService;
 import mk.finki.ukim.mk.lab.service.OrderService;
-import mk.finki.ukim.mk.lab.service.exception.ManufacturerNotFoundException;
+import mk.finki.ukim.mk.lab.exception.ManufacturerNotFoundException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -78,7 +78,7 @@ public class BalloonController {
 
     @RequestMapping (value = "/delete/{id}",method = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET})
     public String deleteBalloon(@PathVariable Long id){
-        System.out.println(balloonService.deleteById(id));
+        balloonService.deleteById(id);
         return "redirect:/balloons";
     }
 }

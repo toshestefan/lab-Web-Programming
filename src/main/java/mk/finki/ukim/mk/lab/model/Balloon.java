@@ -1,19 +1,40 @@
 package mk.finki.ukim.mk.lab.model;
 
+import lombok.Data;
 
+import javax.persistence.*;
+
+@Data
+@Entity
 public class Balloon {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     private  String name;
 
-    private final Long id;
     private  String description;
+
+    @ManyToOne
     private  Manufacturer manufacturer;
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Balloon(String name, String description, Manufacturer manufacturer) {
         this.name = name;
         this.manufacturer = manufacturer;
-        this.id = (long) (Math.random()*1000);
         this.description = description;
+    }
+
+    public Balloon() {
+
     }
 
     public void setName(String name) {
@@ -34,9 +55,6 @@ public class Balloon {
         this.manufacturer = manufacturer;
     }
 
-    public Long getId() {
-        return id;
-    }
 
     public Manufacturer getManufacturer() {
         return manufacturer;

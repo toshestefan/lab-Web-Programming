@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+  <meta charset="UTF-8">
+  <title>Carts</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+  <style>
+    body {
+      width: 1200px;
+      margin: auto;
+    }
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+  </style>
+</head>
+<body>
+<ul>
+  <li><a href="/balloons">Balloons</a></li>
+  <li><a href="/carts">Carts</a></li>
+  <li><a href="/logout" style="float:right">Logout</a></li>
+</ul>
+
+<h2>Previous Orders</h2>
+<table>
+  <tr>
+    <th>Balloon Color</th>
+    <th>Balloon Size</th>
+  </tr>
+  <tr th:each="order: ${orders}">
+    <td><th:block th:text="${order.getBalloonColor()}"></th:block> </td>
+    <td><th:block th:text="${order.getBalloonSize()}"></th:block> </td>
+  </tr>
+</table>
+</body>
+</html>

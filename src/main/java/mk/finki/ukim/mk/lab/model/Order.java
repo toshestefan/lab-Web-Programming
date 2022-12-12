@@ -1,16 +1,41 @@
 package mk.finki.ukim.mk.lab.model;
 
+import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.jetbrains.annotations.NotNull;
+import org.springframework.transaction.annotation.Transactional;
 
-public class Order {
+import javax.persistence.*;
 
+@Data
+@Entity
+@Table(name = "shop_orders")
+public class Order{
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
+
+    @ManyToOne
+    private ShoppingCart cart;
     private String balloonColor;
     private String balloonSize;
-    private String clientName;
-    private String clientAddress;
-    private Long orderId;
 
-    public Order(Long orderId) {
-        this.orderId=orderId;
+
+    public Order (String balloonColor, String balloonSize,ShoppingCart cart) {
+        this.cart = cart;
+        this.balloonColor = balloonColor;
+        this.balloonSize = balloonSize;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+
+
+    public Order() {
     }
 
     public void setBalloonColor(String balloonColor) {
@@ -22,9 +47,6 @@ public class Order {
         return "Order{" +
                 "balloonColor='" + balloonColor + '\'' +
                 ", balloonSize='" + balloonSize + '\'' +
-                ", clientName='" + clientName + '\'' +
-                ", clientAddress='" + clientAddress + '\'' +
-                ", orderId=" + orderId +
                 '}';
     }
 
@@ -32,13 +54,6 @@ public class Order {
         this.balloonSize = balloonSize;
     }
 
-    public void setClientName(String clientName) {
-        this.clientName = clientName;
-    }
-
-    public void setClientAddress(String clientAddress) {
-        this.clientAddress = clientAddress;
-    }
 
     public String getBalloonColor() {
         return balloonColor;
@@ -48,23 +63,9 @@ public class Order {
         return balloonSize;
     }
 
-    public String getClientName() {
-        return clientName;
-    }
-
-    public String getClientAddress() {
-        return clientAddress;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public Order(String balloonColor, String balloonSize, String clientName, String clientAddress, Long id) {
+    public Order(String balloonColor, String balloonSize) {
         this.balloonColor = balloonColor;
         this.balloonSize = balloonSize;
-        this.clientName = clientName;
-        this.clientAddress = clientAddress;
-        this.orderId=id;
     }
+
 }

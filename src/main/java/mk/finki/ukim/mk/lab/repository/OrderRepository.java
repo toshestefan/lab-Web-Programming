@@ -1,28 +1,14 @@
 package mk.finki.ukim.mk.lab.repository;
 
 import mk.finki.ukim.mk.lab.model.Order;
-import org.springframework.stereotype.Repository;
+import mk.finki.ukim.mk.lab.model.ShoppingCart;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-import javax.annotation.PostConstruct;
-import java.util.ArrayList;
 import java.util.List;
 
-@Repository
-public class OrderRepository {
-    private final List<Order> orders = new ArrayList<>();
-
-    @PostConstruct
-    private void init(){
-        orders.add(new Order("yellow","big","Stefan Tosic","Kumanovo", 206032L));
-    }
-    public Order addOrder(String balloonColor, String ballonSize, String clientName, String address,Long id){
-        Order order=new Order(balloonColor, ballonSize, clientName, address, id);
-        orders.add(order);
-        return order;
-    }
+public interface OrderRepository extends JpaRepository<Order,Long> {
 
 
-    public List<Order> listAll() {
-        return orders;
-    }
+    List<Order> findAllByCart(ShoppingCart cart);
 }

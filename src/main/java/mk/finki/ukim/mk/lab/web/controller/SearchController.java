@@ -20,7 +20,8 @@ public class SearchController {
 
     @PostMapping
     public String getSearchPage(@RequestParam String search, @NotNull Model model){
-        model.addAttribute("search",searchService.searchByString(search));
-        return "search";
+        model.addAttribute("be",searchService.searchByString(search));
+        model.addAttribute("bodyContent","search");
+        return "master-template";
     }
 }

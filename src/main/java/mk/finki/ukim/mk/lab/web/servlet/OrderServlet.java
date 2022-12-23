@@ -24,6 +24,7 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession s=req.getSession();
         User user = (User) s.getAttribute("user");
+        resp.setContentType("application/xhtml+xml");
         orderService.placeOrder(
                 (String) s.getAttribute("color"),
                 (String) s.getAttribute("size"), (String) s.getAttribute("cart"));

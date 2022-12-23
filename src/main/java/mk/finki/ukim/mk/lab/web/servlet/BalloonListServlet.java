@@ -36,6 +36,7 @@ public class BalloonListServlet extends HttpServlet {
         context.setVariable("manufacturers",manufacturerService.findAll());
         context.setVariable("orders",orderService.listAll());
         context.setVariable("balloons",balloonService.listAll());
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("listBalloons.html",context,resp.getWriter());
     }
 

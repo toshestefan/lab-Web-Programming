@@ -9,6 +9,7 @@ import mk.finki.ukim.mk.lab.service.ManufacturerService;
 import mk.finki.ukim.mk.lab.service.OrderService;
 import mk.finki.ukim.mk.lab.exception.ManufacturerNotFoundException;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,10 +38,12 @@ public class BalloonController {
         model.addAttribute("balloons",balloonService.listAll());
         model.addAttribute("orders",orderService.listAll());
         model.addAttribute("manufacturers",manufacturerService.findAll());
-        return "listBalloons";
+        model.addAttribute("bodyContent","listBalloons");
+        return "master-template";
     }
 
     @PostMapping("/edit-form/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getEditBalloonPage(@PathVariable Long id, Model model){
         if (this.balloonService.findById(id).isPresent()) {
             Balloon balloon = this.balloonService.findById(id).get();
@@ -48,21 +51,25 @@ public class BalloonController {
             model.addAttribute("manufacturers", manufacturers);
             model.addAttribute("balloon", balloon);
             model.addAttribute("header", "Edit balloon");
-            return "add-balloon";
+            model.addAttribute("bodyContent","add-balloon");
+            return "master-template";
         }
         return "redirect:/balloons?error=ProductNotFound";
 
     }
 
     @GetMapping("/add-form")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getEditBalloonPage(Model model){
         List<Manufacturer> manufacturers = this.manufacturerService.findAll();
         model.addAttribute("manufacturers", manufacturers);
         model.addAttribute("header", "Add balloon");
-        return "add-balloon";
+        model.addAttribute("bodyContent","add-balloon");
+        return "master-template";
     }
 
     @PostMapping("/add")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String saveProduct(
             @RequestParam(required = false) Long id,
             @RequestParam String name,
@@ -77,6 +84,7 @@ public class BalloonController {
     }
 
     @RequestMapping (value = "/delete/{id}",method = {RequestMethod.DELETE, RequestMethod.POST, RequestMethod.GET})
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String deleteBalloon(@PathVariable Long id){
         balloonService.deleteById(id);
         return "redirect:/balloons";

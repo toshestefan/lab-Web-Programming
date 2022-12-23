@@ -27,9 +27,9 @@ public class MyFilter implements Filter {
         }
         String path=httpServletRequest.getServletPath();
         //System.out.println("Filter");
-        if ( !"".equals(path) && !path.contains("/balloons") &&
+        if ( !"".contains(path) && !path.contains("/balloons") &&
                 !"/main.css".equals(path)
-                && !path.contains("/search")
+                && !path.contains("/")
                 && !path.contains("/h2")
                 && !path.contains("/login")
                 && !path.contains("/register")
@@ -37,7 +37,7 @@ public class MyFilter implements Filter {
                 && !path.contains("/logout")
                 && color==null){
             System.out.println(path);
-            httpServletResponse.sendRedirect("");
+            httpServletResponse.sendRedirect("/balloons");
         } else {
             filterChain.doFilter(servletRequest,servletResponse);
         }

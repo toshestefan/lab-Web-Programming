@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.filter;
 
 
 import mk.finki.ukim.mk.lab.model.User;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import java.io.IOException;
 
 @Component
 @Order(1)
+@Profile("servlet")
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,7 +26,7 @@ public class LoginFilter implements Filter {
         HttpServletResponse res= (HttpServletResponse) servletResponse;
         User user= (User) req.getSession().getAttribute("user");
         String path=req.getServletPath();
-        if (!path.contains("/login")
+        if (!path.contains("/")
                 && !path.contains("/register")
                 && !path.contains("/main.css")
                 && !path.contains("/logout")

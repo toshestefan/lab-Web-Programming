@@ -30,7 +30,7 @@ public class ConfirmationInfoServlet  extends HttpServlet {
         String size= (String) req.getSession().getAttribute("size");
         String color= (String) req.getSession().getAttribute("color");
         String cart=req.getParameter("cart");
-
+        resp.setContentType("application/xhtml+xml");
         setAttributesInSession(req.getSession(), clientBrowser, clientIPAddress,cart);
 
         setVariablesInWebContext(webContext, clientBrowser, clientIPAddress, size, color,cart);

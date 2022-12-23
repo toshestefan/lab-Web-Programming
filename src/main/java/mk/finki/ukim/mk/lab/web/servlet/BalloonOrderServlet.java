@@ -29,6 +29,7 @@ public class BalloonOrderServlet extends HttpServlet {
         webContext.setVariable("size",req.getParameter("size"));
         webContext.setVariable("carts",cartService.findAll());
         req.getSession().setAttribute("size",req.getParameter("size"));
+        resp.setContentType("application/xhtml+xml");
         springTemplateEngine.process("deliveryInfo.html",webContext,resp.getWriter());
     }
 }

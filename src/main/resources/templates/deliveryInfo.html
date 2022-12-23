@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="eng">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8"/>
   <title>WP lab - Delivery Info</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+  <link rel="stylesheet" type="text/css" th:href="@{/main.css}"/>
   <style type="text/css">
     body {
       width: 1200px;
@@ -46,7 +46,7 @@
     <label>Shopping Cart <select name="cart">
       <option th:each="cart : ${carts}" th:value="${cart.getId()}" th:text="${cart.getDateCreated()}"></option>
     </select>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit"/>
     </label>
   </form>
 </section>

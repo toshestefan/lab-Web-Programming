@@ -29,17 +29,19 @@ public class LoginController {
 
     @GetMapping
     public String login(@RequestParam(required = false) String error, @NotNull Model model) {
-        return "login";
+
+        model.addAttribute("bodyContent","login");
+        return "master-template";
     }
 
-    @PostMapping("/confirm")
+    @PostMapping
     public String confirm(@RequestParam String username,
                           @RequestParam String password,
                           HttpServletRequest req){
         try {
             Optional<User> user = authService.login(username, password);
             if (user.isPresent()) {
-                req.getSession().setAttribute("user", user.get());
+                req.getSession().setAttribute("user", username);
                 return "redirect:/balloons";
             }
         } catch (IncorrectPasswordException e){

@@ -2,9 +2,11 @@ package mk.finki.ukim.mk.lab.web.controller;
 
 
 import mk.finki.ukim.mk.lab.model.ShoppingCart;
-import mk.finki.ukim.mk.lab.model.User;
 import mk.finki.ukim.mk.lab.service.CartService;
 import mk.finki.ukim.mk.lab.service.OrderService;
+import mk.finki.ukim.mk.lab.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +22,23 @@ public class CartController {
     private final CartService cartService;
     private final OrderService orderService;
 
-    public CartController(CartService cartService, OrderService orderService) {
+    private final UserService userService;
+
+
+
+    public CartController(CartService cartService, OrderService orderService, UserService userService) {
         this.cartService = cartService;
         this.orderService = orderService;
+        this.userService = userService;
     }
 
     @GetMapping
-    public String carts(HttpServletRequest req, Model model){
-        User user= (User) req.getSession().getAttribute("user");
-        model.addAttribute("carts",cartService.selectCartsByUser(user));
-        return "carts";
+    public String carts(HttpServletRequest req, Model model,Authentication authentication){
+        User user= (User) authentication.getPrincipal();
+        mk.finki.ukim.mk.lab.model.User user1=userService.findByUsername(user.getUsername());
+        model.addAttribute("carts",cartService.selectCartsByUser(user1));
+        model.addAttribute("bodyContent","carts");
+        return "master-template";
     }
 
     @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE,RequestMethod.GET,RequestMethod.POST})
@@ -43,13 +52,15 @@ public class CartController {
     public String select(@PathVariable String id,Model model){
         ShoppingCart cart=cartService.selectCartById((long) Integer.parseInt(id)).get();
         model.addAttribute("orders",orderService.findAllByCart(cart));
-        return "orders";
+        model.addAttribute("bodyContent","orders");
+        return "master-template";
     }
 
     @RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
-    public String add(HttpServletRequest req){
-        User user= (User) req.getSession().getAttribute("user");
-        ShoppingCart cart =new ShoppingCart(user);
+    public String add(HttpServletRequest req, Authentication authentication){
+        User user= (User) authentication.getPrincipal();
+        mk.finki.ukim.mk.lab.model.User user1=userService.findByUsername(user.getUsername());
+        ShoppingCart cart =new ShoppingCart(user1);
         cartService.save(cart);
         return "redirect:/carts";
     }

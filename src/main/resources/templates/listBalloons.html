@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="eng">
-<head>
-  <meta charset="utf-8">
-  <title>Balloon Order page - Welcome and choose a Balloon</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
-  <style>
-    body {
-      width: 1200px;
-      margin: auto;
-    }
-    table, th, td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-  </style>
-</head>
-<body>
+<th:block xmlns:th="http://www.thymeleaf.org" >
+
 <header>
   <ul>
     <li><a href="/balloons">Balloons</a></li>
@@ -56,24 +40,28 @@
       <th>Manufacturer</th>
       <th></th>
     </tr>
-    <tr th:each="balloon: ${balloons}">
+    <tr th:each="balloon: ${balloons}" class="balloon">
       <td><th:block th:text="${balloon.getId()}"></th:block> </td>
       <td><th:block th:text="${balloon.getName()}"></th:block> </td>
       <td><th:block th:text="${balloon.getDescription()}"></th:block> </td>
       <td><th:block th:text="${balloon.getManufacturer().getName()}"></th:block> </td>
       <td colspan="2">
+        <th:block sec:authorize="hasRole('ROLE_ADMIN')">
         <form th:action="@{'/balloons/edit-form/{id}' (id=${balloon.getId()})}" th:method="post">
-          <button type="submit">Edit</button>
+          <button type="submit" class="edit-balloon">Edit</button>
         </form>
         <form th:action="@{'/balloons/delete/{id}' (id=${balloon.getId()})}" th:method="DELETE">
-          <button type="submit">Delete</button>
+          <button type="submit" class="delete-balloon">Delete</button>
         </form>
+        </th:block>
       </td>
     </tr>
   </table>
+  <th:block sec:authorize="hasRole('ROLE_ADMIN')">
   <form action="/balloons/add-form" th:method="get">
-    <button type="submit">Add balloon</button>
+    <button type="submit" class="add-balloon-btn">Add balloon</button>
   </form>
+  </th:block>
   <h2>Choose balloon color:</h2>
   <form action="/selectBalloon" method="post">
   <input type="radio" name="color" value="Red Balloon"> Red Balloon<br/>
@@ -83,5 +71,4 @@
   <input type="submit" value="Submit">
   </form>
 </main>
-</body>
-</html>
+</th:block>

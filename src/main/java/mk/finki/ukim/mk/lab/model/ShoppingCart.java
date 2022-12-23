@@ -2,6 +2,7 @@ package mk.finki.ukim.mk.lab.model;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
@@ -34,6 +35,7 @@ public class ShoppingCart {
         this.dateCreated = LocalDateTime.now();
 
     }
+
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateCreated;

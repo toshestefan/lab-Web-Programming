@@ -14,5 +14,6 @@ public interface UserService extends UserDetailsService {
 
     public User register(String username, String name, String surname, LocalDate dateOfBirth, String password, Role role) throws UsernameAlreadyExistsException, InvalidUsernameOrPasswordException;
     public User findByUsername(String username);
+    public void save(User user);
 }
 

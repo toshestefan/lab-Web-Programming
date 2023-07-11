@@ -71,7 +71,7 @@ public class SeleniumScenarioTest {
             m2 = manufacturerService.save("m2", "m2","m2");
 
 
-            regularUser = userService.register(user, user, user, LocalDate.now(), user, Role.ROLE_USER);
+            regularUser = userService.register(user, user, user, LocalDate.now(), "a", Role.ROLE_USER);
             adminUser = userService.register(admin, admin, admin, LocalDate.now(), admin, Role.ROLE_ADMIN);
             dataInitialized = true;
         }

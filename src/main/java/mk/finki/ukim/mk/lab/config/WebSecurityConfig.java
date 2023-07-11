@@ -14,11 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    //private final CustomUsernamePasswordAuthenticationProvider authenticationProvider;
+    private final CustomUsernamePasswordAuthenticationProvider authenticationProvider;
 
-    public WebSecurityConfig(PasswordEncoder passwordEncoder) {
+    public WebSecurityConfig(PasswordEncoder passwordEncoder, CustomUsernamePasswordAuthenticationProvider authenticationProvider) {
 
         this.passwordEncoder = passwordEncoder;
+        this.authenticationProvider = authenticationProvider;
     }
 
     @Override
@@ -51,15 +52,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
+       /* auth.inMemoryAuthentication()
                 .withUser("toshe")
                 .password(passwordEncoder.encode("a"))
                 .authorities("ROLE_USER")
                 .and()
                 .withUser("admin")
                 .password(passwordEncoder.encode("admin"))
-                .authorities("ROLE_ADMIN");
-        //auth.authenticationProvider(authenticationProvider);
+                .authorities("ROLE_ADMIN");*/
+        auth.authenticationProvider(authenticationProvider);
     }
 
 

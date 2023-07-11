@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Role</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/main.css}">
+    <style>
+        body {
+            width: 1200px;
+            margin: auto;
+        }
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+<form method="post" action="/role">
+<label>Role <select name="role">
+  <option value="ROLE_USER">ROLE_USER</option>
+    <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+</select>
+</label>
+    <button type="submit">Change role</button>
+</form>
+</body>
+</html>

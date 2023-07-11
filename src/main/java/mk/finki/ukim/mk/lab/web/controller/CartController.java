@@ -34,8 +34,8 @@ public class CartController {
 
     @GetMapping
     public String carts(HttpServletRequest req, Model model,Authentication authentication){
-        User user= (User) authentication.getPrincipal();
-        mk.finki.ukim.mk.lab.model.User user1=userService.findByUsername(user.getUsername());
+        //User user= (User) authentication.getPrincipal();
+        mk.finki.ukim.mk.lab.model.User user1=userService.findByUsername(authentication.getName());
         model.addAttribute("carts",cartService.selectCartsByUser(user1));
         model.addAttribute("bodyContent","carts");
         return "master-template";
@@ -58,8 +58,8 @@ public class CartController {
 
     @RequestMapping(value = "/add", method = {RequestMethod.GET,RequestMethod.POST})
     public String add(HttpServletRequest req, Authentication authentication){
-        User user= (User) authentication.getPrincipal();
-        mk.finki.ukim.mk.lab.model.User user1=userService.findByUsername(user.getUsername());
+        //User user= (User) authentication.getPrincipal();
+        mk.finki.ukim.mk.lab.model.User user1=userService.findByUsername(authentication.getName());
         ShoppingCart cart =new ShoppingCart(user1);
         cartService.save(cart);
         return "redirect:/carts";

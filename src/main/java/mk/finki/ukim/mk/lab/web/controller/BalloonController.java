@@ -38,7 +38,7 @@ public class BalloonController {
         model.addAttribute("balloons",balloonService.listAll());
         model.addAttribute("orders",orderService.listAll());
         model.addAttribute("manufacturers",manufacturerService.findAll());
-        model.addAttribute("bodyContent","listBalloons");
+        model.addAttribute("bodyContent","listBalloons");//
         return "master-template";
     }
 

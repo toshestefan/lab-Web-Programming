@@ -24,6 +24,7 @@ public class DataInitializer {
     @PostConstruct
     public void init(){
         manufacturerService.save("a","a","a");
+        manufacturerService.save("b","b","b");
          try {
              userService.findByUsername("a");
          } catch (NoSuchElementException e){
